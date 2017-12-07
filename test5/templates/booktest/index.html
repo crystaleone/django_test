@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/booktest/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            $.get('/pro/',function (dic) {
+                pro=$('#pro')
+                $.each(dic.data,function (index,item) {
+                    pro.append('<option value="' + item[0] + '">' + item[1] + '</option>')
+                })
+            })
+
+            $('#pro').change(function (){
+                //area2/
+                $.get('/city'+$(this).val()+'/',function (list) {
+                    city=$('#city');
+                    city.empty().append('<option value="0">please choice region</option>')
+                    $('#dis').empty().append('<option value="0">please choice district</option>')
+                    //{data:[{id:1,title:beijing},{di:2,title:tianjin},...]}
+                    $.each(list.data,function (index,item) {
+                        //{id:1,title:beijing}
+                        city.append('<option value="'+item.id+'">'+item.title+'</option>');
+                    });
+                });
+            });
+
+            $('#city').change(function () {
+                $.get('/city'+$(this).val()+'/',function (list) {
+                    dis=$('#dis').empty().append('<option value="0">please choice district</option>');
+                    $.each(list.data,function (index, item) {
+                        dis.append('<option value="'+item.id+'">'+item.title+'</option>');
+                    });
+                });
+            });
+        });
+        <!--$('li').each(function () {-->
+        <!---->
+        <!--})-->
+    </script>
+</head>
+
+<body>
+<select id="pro">
+    <option value="0">please choice province</option>
+</select>
+
+<select id="city">
+    <option value="0">please choice region</option>
+</select>
+
+<select id="dis">
+    <option value="0">please choice district</option>
+</select>
+</body>
+</html>
