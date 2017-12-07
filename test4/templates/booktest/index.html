@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'booktest:show' '456' '123' %}">link1</a>
+{{ hero.hname }}
+{{ hero.showname }}
+<hr>
+odd line show red color,even line show blue color
+<hr>
+<ur>
+{% for hero in List  %}
+    {% if forloop.counter|divisibleby:"2" %}
+    <li style="color:red" >{{ forloop.counter }}:{{ hero.showname }}</li>
+    {% else %}
+    <li style="color:blue">{{ forloop.counter }}:{{ hero.showname }}</li>
+    {% endif %}
+    {% empty %}
+    nothing for finding
+{% endfor %}
+</ur>
+</body>
+</html>
